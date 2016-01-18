@@ -40,8 +40,8 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
 		return this.data.compareTo(other.getData());
 	}
 	
-	public T evaluate() {
-		return data;
+	public Node<T> evaluate() {
+		return this;
 	}
 		
 }
