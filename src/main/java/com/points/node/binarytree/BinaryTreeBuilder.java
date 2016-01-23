@@ -2,33 +2,31 @@ package com.points.node.binarytree;
 
 import java.util.List;
 
-import com.points.node.twochild.Node;
+import com.points.tree.Node;
+import com.points.tree.TreeBuilder;
 
-public class BinaryTreeBuilder {
-
-	public static <T extends Comparable<T>> Node<T> setUpTree(List<T> nodeValues) {
-		if (nodeValues == null) {
+public class BinaryTreeBuilder<T extends Comparable> implements TreeBuilder {
+	@Override
+	public Node<T> buildTree(List nodeValues) {
+		
+		if (nodeValues == null || nodeValues.isEmpty() ) {
 			return null;
 		}
-
-		Node<T> firstNode = null;
-		for (T value : nodeValues) {
-			if (firstNode == null) {
-				firstNode = new Node<>(value);
-				continue;
-			}
-			addToTree(firstNode, value);
+		
+		Node<T> rootNode = new Node(nodeValues.get(0));
+		for (int i = 1; i < nodeValues.size(); i++ ) {
+			addToTree(rootNode, nodeValues.get(i));
 		}
 
-		return firstNode;
+		return rootNode;
 	}
 
-	private static <T extends Comparable<T>> void addToTree(Node<T> firstNode, T value) {
-		if (firstNode == null || value == null ) {
+	private static <T> void addToTree(Node<T> rootNode, T value) {
+		if (rootNode == null || value == null ) {
 			return;
 		}
 		
-		Node<T> currentNode = firstNode;
+		Node<T> currentNode = rootNode;
 		Node<T> child = currentNode;
 		boolean isLeftChild = false;
 
@@ -54,5 +52,7 @@ public class BinaryTreeBuilder {
 			currentNode.setRightChild(child);
 		}
 	}
+
+	
 
 }
