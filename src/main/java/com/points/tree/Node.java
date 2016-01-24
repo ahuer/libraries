@@ -1,21 +1,19 @@
 package com.points.tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Node<T extends Comparable> {
 	
 	private T data;
-	private Node<T>[] children;
+	private List<Node<T>> children;
 	
 	@SuppressWarnings("unused")
 	public Node() {}
 	
-	public Node(T data, int numChildren) {
+	public Node(T data) {
 		this.data = data;
-		
-		if (numChildren < 1 ) {
-			throw new IllegalArgumentException("NumChildren must be more than 0");
-		} 
-		
-		children = new Node[numChildren];		
+		children = new ArrayList<>();		
 	}
 	
 	public T getData() {
@@ -26,28 +24,20 @@ public class Node<T extends Comparable> {
 		this.data = data;
 	}
 	
-	public Node<T>[] getChildren() {
+	public List<Node<T>> getChildren() {
 		return children;
 	}
 	
-	public void setChildren(Node<T>[] children) {
+	public void setChildren(List<Node<T>> children) {
 		this.children = children;
 	}
 	
 	public Node<T> getChild(int index) {
-		if (index < 0 || index > children.length - 1 ) {
-			throw new IllegalArgumentException("Invalid index provided '" + index + "'");
-		}
-		
-		return children[index];
+		return children.get(index);
 	}
 	
 	public void setChild(Node<T> value, int index) {
-		if (index < 0 || index > children.length - 1 ) {
-			throw new IllegalArgumentException("Invalid index provided '" + index + "'");
-		}
-		
-		children[index] = value;
+		children.set(index, value);
 	}
 
 	public int compareTo(Node<T> o) {
