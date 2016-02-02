@@ -8,7 +8,7 @@ class BinaryTreeBuilderTest {
 
 	@Test
 	public void testBuilderShortList() {
-		def list = [3, 4, 2]
+		def list = [2, 4, 3]
 		def builder = new BinaryTreeBuilder<Comparable>()
 		def tree = (BinaryTreeNode) builder.buildTree(list)
 		assertEquals(3, tree.getData())

@@ -43,9 +43,5 @@ public class Node<T extends Comparable> {
 	public int compareTo(Node<T> o) {
 		return this.getData().compareTo(o.getData());
 	}
-	
-	public Node<T> evaluate() {
-		return this;
-	}
 
 }

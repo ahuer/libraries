@@ -18,19 +18,19 @@ public class BinaryTreeNode<T extends Comparable> extends Node {
 		this.setChildren(children);
 	}
 	
-	public BinaryTreeNode<T> getLeftChild() {
-		return (BinaryTreeNode<T>) getChild(0);
+	public Node<T> getLeftChild() {
+		return getChild(0);
 	}
 
-	public void setLeftChild(BinaryTreeNode<T> leftChild) {
+	public void setLeftChild(Node<T> leftChild) {
 		setChild(leftChild, 0);
 	}
 
-	public BinaryTreeNode<T> getRightChild() {
-		return (BinaryTreeNode<T>) getChild(1);
+	public Node<T> getRightChild() {
+		return getChild(1);
 	}
 
-	public void setRightChild(BinaryTreeNode<T> rightChild) {
+	public void setRightChild(Node<T> rightChild) {
 		setChild(rightChild, 1);
 	}
 		

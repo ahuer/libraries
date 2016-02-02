@@ -15,48 +15,24 @@ public class BinaryTreeBuilder<T extends Comparable> implements TreeBuilder {
 			return null;
 		}
 		
-		Collections.sort(nodeValues);		
-		int middle = nodeValues.size() / 2;
-		BinaryTreeNode<T> rootNode = new BinaryTreeNode((T) nodeValues.get(middle));
-
-		return addToTree(rootNode, nodeValues);
+		Collections.sort(nodeValues);	
+		return createTreeFromList(nodeValues);
 	}
 
-	private <T extends Comparable> BinaryTreeNode<T> addToTree(BinaryTreeNode<T> rootNode, List<T> nodeValues) {
-		if (rootNode == null || nodeValues == null || nodeValues.isEmpty() ) {
+	private <T extends Comparable> BinaryTreeNode<T> createTreeFromList(List<T> nodeValues) {
+		if (nodeValues == null || nodeValues.isEmpty() ) {
 			return null;
 		}
 		
 		if (nodeValues.size() == 1 ) {
-			return rootNode;
-		}
-		// FIX LATER 
-		
-		BinaryTreeNode<T> currentNode = rootNode;
-		BinaryTreeNode<T> child = currentNode;
-		boolean isLeftChild = false;
-
-		while (child != null) {
-			isLeftChild = false;
-			
-			if (nodeValues.get(0).compareTo(currentNode.getData()) < 0) {
-				child = currentNode.getLeftChild();
-				isLeftChild = true;
-			} else {
-				child = currentNode.getRightChild();
-			}
-
-			if (child != null) {
-				currentNode = child;
-			}
+			return new BinaryTreeNode<>(nodeValues.get(0));
 		}
 		
-		child = new BinaryTreeNode<>(nodeValues.get(0));
-		if (isLeftChild) {
-			currentNode.setLeftChild(child);
-		} else {
-			currentNode.setRightChild(child);
-		}
+		int middle = nodeValues.size() / 2;
+		BinaryTreeNode<T> rootNode = new BinaryTreeNode<>(nodeValues.get(middle));
+		
+		rootNode.setLeftChild(createTreeFromList(nodeValues.subList(0, middle)));
+		rootNode.setRightChild(createTreeFromList(nodeValues.subList(middle + 1, nodeValues.size())));
 		
 		return rootNode;
 	}
