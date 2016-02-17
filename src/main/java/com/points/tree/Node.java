@@ -1,19 +1,20 @@
 package com.points.tree;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Node<T extends Comparable> {
 	
 	private T data;
-	private List<Node<T>> children;
+	private Map<Integer, Node<T>> children;
 	
 	@SuppressWarnings("unused")
 	public Node() {}
 	
 	public Node(T data) {
 		this.data = data;
-		children = new ArrayList<>();		
+		children = new HashMap<>();		
 	}
 	
 	public T getData() {
@@ -24,28 +25,20 @@ public class Node<T extends Comparable> {
 		this.data = data;
 	}
 	
-	public List<Node<T>> getChildren() {
+	public Map<Integer, Node<T>> getChildren() {
 		return children;
 	}
 	
-	public void setChildren(List<Node<T>> children) {
+	public void setChildren(Map<Integer, Node<T>> children) {
 		this.children = children;
 	}
 	
-	public Node<T> getChild(int index) {
-		return children.get(index);
+	public Node<T> getChild(int key) {
+		return children.get(key);
 	}
 	
-	public void setChild(Node<T> value, int index) {
-		children.set(index, value);
-	}
-
-	public int compareTo(Node<T> o) {
-		return this.getData().compareTo(o.getData());
-	}
-	
-	public Node<T> evaluate() {
-		return this;
+	public void setChild(Node<T> value, int key) {
+		children.put(key, value);
 	}
 
 }
